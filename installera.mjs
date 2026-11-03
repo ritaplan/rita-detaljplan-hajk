@@ -8,7 +8,7 @@
 // Skriptet gör fyra saker, och kan köras om utan skada:
 //   1. kopierar plugin/Detaljplaner till apps/client/src/plugins/Detaljplaner
 //   2. lägger "Detaljplaner" i AVAILABLE_TOOLS i apps/client/src/constants.js
-//   3. lägger "Detaljplaner" i availableTools i apps/client/public/appConfig.json
+//   3. lägger "Detaljplaner" i availableTools i apps/client/public/appConfig.json (och appConfig.docker.json)
 //   4. lägger inställningssidan admin/detaljplaner.jsx i Hajk Admin (apps/admin/src/views/tools) och registrerar
 //      den i tooloptions.jsx
 // Därefter bygger du om klienten (och Admin om du använder den). Se docs/installera.md.
@@ -81,36 +81,44 @@ if (remove) {
 }
 fs.writeFileSync(constantsFile, constants);
 
-// --- 3. appConfig.json -------------------------------------------------------------------------------------------
+// --- 3. appConfig.json och appConfig.docker.json -----------------------------------------------------------------
+// Hajks Docker-bygge ersätter appConfig.json med appConfig.docker.json, så verktyget ska finnas i båda.
 // Texten ändras direkt (inte via JSON.parse), så att resten av filen får vara som den är.
-if (fs.existsSync(appConfigFile)) {
-  let text = fs.readFileSync(appConfigFile, "utf8");
+function patchAppConfig(file) {
+  const name = path.basename(file);
+  let text = fs.readFileSync(file, "utf8");
   const nl = text.includes("\r\n") ? "\r\n" : "\n";
   const tools = /("availableTools"\s*:\s*\[)([\s\S]*?)(\])/;
   if (!tools.test(text)) {
-    console.log("appConfig.json saknar availableTools: alla verktyg läses in, inget att ändra.");
-  } else {
-    const present = new RegExp(`"${NAME}"`).test(tools.exec(text)[2]);
-    if (remove && present) {
-      text = text.replace(
-        tools,
-        (whole, open, body, close) => `${open}${body.replace(new RegExp(`\\s*"${NAME}",?`), "")}${close}`
-      );
-    } else if (!remove && !present) {
-      text = text.replace(tools, (whole, open, body, close) => {
-        const items = body.match(/"[^"]*"/g) || [];
-        const indent = (/\r?\n([ \t]+)"/.exec(body) || [, "    "])[1];
-        const after = items.findIndex((t) => t.replace(/"/g, "") > NAME);
-        items.splice(after < 0 ? items.length : after, 0, `"${NAME}"`);
-        return `${open}${nl}${items.map((t) => indent + t).join(`,${nl}`)}${nl}  ${close}`;
-      });
-    }
-    fs.writeFileSync(appConfigFile, text);
-    console.log(`appConfig.json: ${remove ? "Detaljplaner borttagen" : "Detaljplaner med i availableTools"}`);
+    console.log(`${name} saknar availableTools: alla verktyg läses in, inget att ändra.`);
+    return;
   }
-} else {
+  const present = new RegExp(`"${NAME}"`).test(tools.exec(text)[2]);
+  if (remove && present) {
+    text = text.replace(
+      tools,
+      (whole, open, body, close) => `${open}${body.replace(new RegExp(`\\s*"${NAME}",?`), "")}${close}`
+    );
+  } else if (!remove && !present) {
+    text = text.replace(tools, (whole, open, body, close) => {
+      const items = body.match(/"[^"]*"/g) || [];
+      const indent = (/\r?\n([ \t]+)"/.exec(body) || [, "    "])[1];
+      const after = items.findIndex((t) => t.replace(/"/g, "") > NAME);
+      items.splice(after < 0 ? items.length : after, 0, `"${NAME}"`);
+      return `${open}${nl}${items.map((t) => indent + t).join(`,${nl}`)}${nl}  ${close}`;
+    });
+  }
+  fs.writeFileSync(file, text);
+  console.log(`${name}: ${remove ? "Detaljplaner borttagen" : "Detaljplaner med i availableTools"}`);
+}
+
+const appConfigFiles = [appConfigFile, path.join(client, "public", "appConfig.docker.json")].filter((f) =>
+  fs.existsSync(f)
+);
+if (appConfigFiles.length === 0) {
   console.log("Hittar ingen appConfig.json här: lägg in Detaljplaner i availableTools där du har den.");
 }
+appConfigFiles.forEach(patchAppConfig);
 
 // --- 4. Hajk Admin -----------------------------------------------------------------------------------------------
 // Sidan registreras i tooloptions.jsx med tre rader: en import, en case och en rubrik i listan över verktyg.

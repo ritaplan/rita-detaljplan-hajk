@@ -54,6 +54,7 @@ Hajk Admin. Därefter lägger du detaljplanelagret i din karta, ställer in verk
 | Dokument | Innehåll |
 |---|---|
 | [docs/installera.md](docs/installera.md) | Installera pluginet, lägg in lagret och verktyget, bygg om. Uppgradera och ta bort. |
+| [docs/produktion.md](docs/produktion.md) | Köra Hajk med pluginet i Docker på en server: bygge, upplägg och säkerhet. |
 | [docs/konfiguration.md](docs/konfiguration.md) | Alla inställningar, hur klicket tolkas och hur du tillåter anrop mellan Hajk och GeoServer. |
 | [docs/felsokning.md](docs/felsokning.md) | Vanliga problem och hur de rättas. |
 | [SECURITY.md](SECURITY.md) | Hur säkerheten är tänkt och hur du rapporterar en säkerhetsbrist. |
@@ -65,19 +66,19 @@ Hajk Admin. Därefter lägger du detaljplanelagret i din karta, ställer in verk
 | `plugin/Detaljplaner/` | Själva pluginet (React och Material UI). Kopieras till `apps/client/src/plugins/`. |
 | `admin/detaljplaner.jsx` | Inställningssidan i Hajk Admin. Kopieras till `apps/admin/src/views/tools/`. |
 | `installera.mjs` | Lägger in pluginet i en Hajk-mapp, eller tar bort det (`--ta-bort`). |
-| `exempel/` | Exempel på lager och verktyg att lägga i Hajks kartfiler. |
+| `exempel/` | Exempel på lager, verktyg och en `docker-compose.yml` för Hajk. |
 
 ## Provat med
 
-Hajk 4.3.0 (klienten i utvecklingsläge, backend på Node 26), GeoServer 3.0.2 och Rita Detaljplans demoplaner. Provat: klick
+Hajk 4.3.0 (klienten och Admin i utvecklingsläge och som produktionsbygge, backend på Node 26 och i en Node 24-behållare på en server), GeoServer 3.0.2 och Rita Detaljplans demoplaner. Provat: klick
 på plan och på tom mark, fönstret på dator och mobil, handlingslänkar, alla bestämmelser (WFS), markering i kartan och
 anrop genom Hajks egen proxy. Kartan gick i Web Mercator (EPSG:3857).
 
+Produktionsbygget av Hajk (klient och Admin) med pluginet är provkört i Docker på en server: se [docs/produktion.md](docs/produktion.md).
 Inställningssidan i Hajk Admin är provad så här: sidan öppnas med de sparade värdena, en ändring sparas och kartfilen
 uppdateras utan att andra verktyg påverkas.
 
-**Inte provat:** kartor i andra koordinatsystem än Web Mercator, ett produktionsbygge av Hajk Admin (bara utvecklingsläget
-provades), Hajk med inloggning (Active Directory) och andra Hajk-versioner än 4.3.0.
+**Inte provat:** kartor i andra koordinatsystem än Web Mercator, Hajk med inloggning (Active Directory) och andra Hajk-versioner än 4.3.0.
 
 ## Begränsningar
 

@@ -1,0 +1,28 @@
+# Hajk (backend, klient och Admin) i en liten Node-behållare. Provkörning: lyssnar bara på 127.0.0.1.
+#   app/        backend, klient och Admin (skrivskyddad)
+#   App_Data/   kartor och lager (skrivbar: Admin sparar här)
+#   logs/       loggar (skrivbar)
+# Når GeoServer-behållaren (planmosaik-geoserver) genom Dockernätverket planmosaik_default.
+name: hajk
+
+services:
+  hajk:
+    image: node:24-slim
+    container_name: hajk
+    restart: unless-stopped
+    working_dir: /usr/app
+    command: ["node", "index.js"]
+    environment:
+      PORT: "3002"
+    volumes:
+      - ./app:/usr/app:ro
+      - ./App_Data:/usr/app/App_Data
+      - ./logs:/usr/app/logs
+    ports:
+      - "127.0.0.1:8095:3002"
+    mem_limit: 384m
+    networks: [planmosaik_default]
+
+networks:
+  planmosaik_default:
+    external: true
