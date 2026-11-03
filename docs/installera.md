@@ -40,6 +40,10 @@ lagerlista, antingen i administrationsgränssnittet (WMS-lager) eller direkt i `
 | Frågbart (`queryable` i `layersInfo`) | **av** |
 | Rutor (`tiled`) | av (`singleTile` på) |
 
+<p align="center">
+  <img src="images/admin-lager.png" alt="Hajk Admin, fliken Lager: WMS-lagret Detaljplaner med adressen till GeoServers WMS, version 1.1.1, bildformat image/png och koordinatsystem EPSG:3857" width="720">
+</p>
+
 Lägg lagret i en grupp i lagerhanteraren och notera lagrets **id** (till exempel `detaljplaner`). Det behövs i steg 3.
 
 Slå **av** att lagret är frågbart. Annars svarar Hajks egen infoklick också och du får två rutor.

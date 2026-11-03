@@ -1,4 +1,9 @@
-# Rita Detaljplan – Hajk-plugin
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/banner-mork.svg">
+    <img src="docs/images/banner-ljus.svg" alt="Rita Detaljplan – detaljplaner i din Hajk-karta" width="720">
+  </picture>
+</h1>
 
 **Visa kommunens detaljplaner i Hajk, direkt ur plandatabasen.** Ett klick på en plan öppnar ett fönster med planens
 uppgifter, plankartan och planbeskrivningen och alla bestämmelser i området med motiv. Det här är ett plugin för
@@ -7,6 +12,14 @@ uppgifter, plankartan och planbeskrivningen och alla bestämmelser i området me
 Det är samma panel som i Origo-lösningen [rita-detaljplan-origomap](https://github.com/ritaplan/rita-detaljplan-origomap),
 omskriven som ett Hajk-plugin (React och Material UI). Planerna ritas i QGIS-pluginet
 [Rita Detaljplan](https://github.com/ritaplan/rita-detaljplan) och checkas in i PostGIS.
+
+<p align="center">
+  <img src="docs/images/skarmbild.png" alt="Hajk med pluginet Detaljplaner: en vald detaljplan är inramad i kartan och fönstret till vänster visar planens status, plankartan och planbeskrivningen som knappar, syfte, datum och genomförandetid" width="720">
+</p>
+
+<p align="center">
+  <img src="docs/images/skarmbild-bestammelser.png" alt="Hajk med pluginet Detaljplaner: fönstret visar bestämmelserna i området med motiv, och en egenskap som gäller där man klickade är markerad Gäller här" width="720">
+</p>
 
 ## Vad du får
 
