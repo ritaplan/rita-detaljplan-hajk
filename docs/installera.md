@@ -14,13 +14,15 @@ Kör skriptet från det här repot och ange mappen som innehåller Hajks `apps/`
 node installera.mjs /sökväg/till/din/hajk
 ```
 
-Skriptet gör tre saker, och kan köras om utan skada:
+Skriptet gör fyra saker, och kan köras om utan skada:
 
 1. Kopierar `plugin/Detaljplaner` till `apps/client/src/plugins/Detaljplaner`.
 2. Lägger `"Detaljplaner"` i `AVAILABLE_TOOLS` i `apps/client/src/constants.js`.
 3. Lägger `"Detaljplaner"` i `availableTools` i `apps/client/public/appConfig.json` (om filen har en sådan lista).
+4. Lägger inställningssidan `admin/detaljplaner.jsx` i `apps/admin/src/views/tools/` och registrerar den i
+   `tooloptions.jsx` (tre rader). Hoppa över detta med `--utan-admin`, eller om du inte använder Hajk Admin.
 
-Det ändrar bara de raderna. Vill du göra det för hand: gör de tre sakerna ovan.
+Det ändrar bara de raderna. Vill du göra det för hand: gör sakerna ovan.
 
 ## 2. Lägg in lagret i Hajk
 
@@ -44,8 +46,13 @@ Slå **av** att lagret är frågbart. Annars svarar Hajks egen infoklick också 
 
 ## 3. Lägg in verktyget i kartan
 
-Kartans inställningar ligger i en JSON-fil i Hajks backend (`apps/backend/App_Data/<karta>.json`). Lägg verktyget sist i
-listan `tools`. Ett färdigt exempel finns i [`exempel/verktyg.json`](../exempel/verktyg.json):
+**I Hajk Admin (rekommenderas).** Öppna fliken *Kartor*, välj kartan, klicka *Verktyg* och välj *Detaljplaner* i listan. Kryssa
+*Aktiverad*, fyll i WMS-adressen (och WFS-adressen om du vill ha knappen "Visa alla bestämmelser i planen"), kryssa de lager som
+visar detaljplanerna och tryck *Spara*. Alla fält förklaras med frågetecknen vid fälten och i
+[konfiguration.md](konfiguration.md).
+
+**Eller i JSON.** Kartans inställningar ligger i en JSON-fil i Hajks backend (`apps/backend/App_Data/<karta>.json`). Lägg verktyget
+sist i listan `tools`. Ett färdigt exempel finns i [`exempel/verktyg.json`](../exempel/verktyg.json):
 
 ```json
 {
@@ -75,6 +82,9 @@ Ligger kartan och GeoServer på olika adresser måste anropen tillåtas: se [kon
 ```sh
 cd /sökväg/till/din/hajk/apps/client
 npm run build        # eller npm run dev för att prova
+
+cd ../admin
+npm run build        # bara om du använder Hajk Admin och vill se inställningssidan
 ```
 
 Öppna kartan, tänd lagret Detaljplaner och klicka på en plan. Fönstret öppnas med planens uppgifter. Klickar du utanför
@@ -91,4 +101,5 @@ inte filerna i Hajk: ändra dem här.
 node installera.mjs /sökväg/till/din/hajk --ta-bort
 ```
 
-Ta även bort verktyget ur kartans JSON-fil, och bygg om klienten.
+Ta även bort verktyget ur kartan (Admin: avmarkera *Aktiverad* och spara, eller ta bort det ur kartans JSON-fil), och bygg om
+klienten och Admin.

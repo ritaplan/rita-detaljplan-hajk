@@ -16,6 +16,7 @@ omskriven som ett Hajk-plugin (React och Material UI). Planerna ritas i QGIS-plu
 | **Informationsfönster vid klick** | Status i klartext, handlingar (plankarta och planbeskrivning som knappar), syfte, datum och genomförandetid. Bestämmelserna i området med motiv, där de som gäller exakt där man klickade är markerade. |
 | **Markering i kartan** | Området man klickade i ramas in. När man pekar på en bestämmelse markeras dess yta. |
 | **Alla bestämmelser i planen** | En knapp hämtar bestämmelserna i alla områden (WFS). |
+| **Inställningssida i Hajk Admin** | Verktyget ställs in i Hajks administrationsgränssnitt (Kartor, Verktyg, Detaljplaner): adresser, vilka lager som visar planerna och fönstrets utseende. Inget JSON-arbete. |
 | **Hajks eget utseende** | Fönstret följer Hajks tema (provat i mörkt läge) och fungerar på dator och telefon. |
 | **Bara det som är offentligt** | Pluginet läser samma skrivskyddade vyer som Origo-lösningen. Du bestämmer vilka planstatusar som visas. |
 
@@ -45,8 +46,8 @@ cd rita-detaljplan-hajk
 node installera.mjs /sökväg/till/din/hajk          # mappen som innehåller apps/
 ```
 
-Skriptet kopierar pluginet till Hajks klient och lägger `Detaljplaner` i listan över verktyg. Därefter lägger du
-detaljplanelagret och verktyget i din karta och bygger om klienten. Steg för steg: **[docs/installera.md](docs/installera.md)**.
+Skriptet kopierar pluginet till Hajks klient, lägger `Detaljplaner` i listan över verktyg och lägger inställningssidan i
+Hajk Admin. Därefter lägger du detaljplanelagret i din karta, ställer in verktyget i Admin och bygger om klienten (och Admin). Steg för steg: **[docs/installera.md](docs/installera.md)**.
 
 ## Dokumentation
 
@@ -62,6 +63,7 @@ detaljplanelagret och verktyget i din karta och bygger om klienten. Steg för st
 | Mapp eller fil | Vad det är |
 |---|---|
 | `plugin/Detaljplaner/` | Själva pluginet (React och Material UI). Kopieras till `apps/client/src/plugins/`. |
+| `admin/detaljplaner.jsx` | Inställningssidan i Hajk Admin. Kopieras till `apps/admin/src/views/tools/`. |
 | `installera.mjs` | Lägger in pluginet i en Hajk-mapp, eller tar bort det (`--ta-bort`). |
 | `exempel/` | Exempel på lager och verktyg att lägga i Hajks kartfiler. |
 
@@ -71,13 +73,16 @@ Hajk 4.3.0 (klienten i utvecklingsläge, backend på Node 26), GeoServer 3.0.2 o
 på plan och på tom mark, fönstret på dator och mobil, handlingslänkar, alla bestämmelser (WFS), markering i kartan och
 anrop genom Hajks egen proxy. Kartan gick i Web Mercator (EPSG:3857).
 
-**Inte provat:** Hajks administrationsgränssnitt (pluginet saknar där en egen inställningssida, se nedan), kartor i andra
-koordinatsystem än Web Mercator, Hajk med inloggning (Active Directory) och andra Hajk-versioner än 4.3.0.
+Inställningssidan i Hajk Admin är provad så här: sidan öppnas med de sparade värdena, en ändring sparas och kartfilen
+uppdateras utan att andra verktyg påverkas.
+
+**Inte provat:** kartor i andra koordinatsystem än Web Mercator, ett produktionsbygge av Hajk Admin (bara utvecklingsläget
+provades), Hajk med inloggning (Active Directory) och andra Hajk-versioner än 4.3.0.
 
 ## Begränsningar
 
-- Verktyget ställs in genom att redigera kartans JSON-fil, inte i Hajks administrationsgränssnitt. En egen inställningssida
-  i Admin är inte gjord.
+- Hajk Admin är en separat applikation som också måste byggas om för att inställningssidan ska synas. Vill du inte ha den,
+  kör installationen med `--utan-admin` och ställ in verktyget i kartans JSON-fil.
 - Vektorrutor (variant B i Origo-lösningen) stöds inte av Hajk 4.3. Använd lagret som bildlager (WMS).
 - Lagret i Hajk ska vara markerat som inte frågbart i Hajks egen infoklick, annars visas två rutor. Pluginet sköter klicken.
 - Texterna i fönstret är på svenska.

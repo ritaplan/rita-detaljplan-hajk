@@ -3,12 +3,15 @@
 //
 //   node installera.mjs <sökväg till Hajk, mappen som innehåller apps/>
 //   node installera.mjs <sökväg till Hajk> --ta-bort
+//   node installera.mjs <sökväg till Hajk> --utan-admin    (hoppar över inställningssidan i Hajk Admin)
 //
-// Skriptet gör tre saker, och kan köras om utan skada:
+// Skriptet gör fyra saker, och kan köras om utan skada:
 //   1. kopierar plugin/Detaljplaner till apps/client/src/plugins/Detaljplaner
 //   2. lägger "Detaljplaner" i AVAILABLE_TOOLS i apps/client/src/constants.js
 //   3. lägger "Detaljplaner" i availableTools i apps/client/public/appConfig.json
-// Därefter lägger du verktyget i kartans inställningar (se docs/installera.md) och bygger om klienten.
+//   4. lägger inställningssidan admin/detaljplaner.jsx i Hajk Admin (apps/admin/src/views/tools) och registrerar
+//      den i tooloptions.jsx
+// Därefter bygger du om klienten (och Admin om du använder den). Se docs/installera.md.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,6 +20,7 @@ const NAME = "Detaljplaner";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
 const remove = args.includes("--ta-bort");
+const withoutAdmin = args.includes("--utan-admin");
 const hajk = args.find((a) => !a.startsWith("--"));
 
 function fail(message) {
@@ -108,6 +112,58 @@ if (fs.existsSync(appConfigFile)) {
   console.log("Hittar ingen appConfig.json här: lägg in Detaljplaner i availableTools där du har den.");
 }
 
+// --- 4. Hajk Admin -----------------------------------------------------------------------------------------------
+// Sidan registreras i tooloptions.jsx med tre rader: en import, en case och en rubrik i listan över verktyg.
+const adminDir = path.join(path.resolve(hajk), "apps", "admin", "src", "views");
+const toolOptionsFile = path.join(adminDir, "tooloptions.jsx");
+const adminTarget = path.join(adminDir, "tools", "detaljplaner.jsx");
+let adminDone = false;
+
+if (withoutAdmin) {
+  console.log("Hajk Admin: hoppade över (--utan-admin).");
+} else if (!fs.existsSync(toolOptionsFile)) {
+  console.log("Hajk Admin: hittar inte apps/admin här, hoppar över inställningssidan.");
+} else {
+  let text = fs.readFileSync(toolOptionsFile, "utf8");
+  const nl = text.includes("\r\n") ? "\r\n" : "\n";
+  const lines = {
+    import: 'import Detaljplaner from "./tools/detaljplaner.jsx";',
+    // [rad före vilken casen läggs, casen]
+    caseAnchor: '      case "dummy":',
+    caseText: [
+      '      case "detaljplaner":',
+      "        return <Detaljplaner parent={this} model={this.props.model} />;",
+    ],
+    importAnchor: 'import Dummy from "./tools/dummy.jsx";',
+    typeAnchor: '      documenthandler: "Dokumenthanterare",',
+    typeText: '      detaljplaner: "Detaljplaner",',
+  };
+  const missing = [lines.importAnchor, lines.caseAnchor, lines.typeAnchor].filter((a) => !text.includes(a));
+  if (missing.length && !remove) {
+    console.log("Hajk Admin: tooloptions.jsx ser annorlunda ut än väntat, hoppar över. Se docs/installera.md.");
+  } else {
+    if (remove) {
+      text = text
+        .replace(`${lines.import}${nl}`, "")
+        .replace(`${lines.caseText.join(nl)}${nl}`, "")
+        .replace(`${lines.typeText}${nl}`, "");
+      fs.rmSync(adminTarget, { force: true });
+    } else {
+      const before = (anchor, add) => (text.includes(add) ? null : text.replace(anchor, `${add}${nl}${anchor}`));
+      text = before(lines.importAnchor, lines.import) ?? text;
+      text = before(lines.caseAnchor, lines.caseText.join(nl)) ?? text;
+      text = before(lines.typeAnchor, lines.typeText) ?? text;
+      fs.copyFileSync(path.join(here, "admin", "detaljplaner.jsx"), adminTarget);
+    }
+    fs.writeFileSync(toolOptionsFile, text);
+    adminDone = true;
+    console.log(`Hajk Admin: ${remove ? "inställningssidan borttagen" : "inställningssidan inlagd"}`);
+  }
+}
+
 if (!remove) {
-  console.log("\nKlart. Nästa steg: lägg verktyget i kartans inställningar (docs/installera.md) och starta om klienten.");
+  console.log(
+    `\nKlart. Nästa steg: bygg om klienten${adminDone ? " (och Admin)" : ""}. ` +
+      "Ställ in verktyget i Admin, eller lägg det i kartans JSON-fil (docs/installera.md)."
+  );
 }

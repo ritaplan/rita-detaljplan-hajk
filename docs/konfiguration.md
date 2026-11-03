@@ -1,8 +1,11 @@
 # Inställningar
 
-Pluginet ställs in i kartans JSON-fil (`apps/backend/App_Data/<karta>.json`), i verktygets `options`. Hajks administrationsgränssnitt
-har ingen sida för pluginet, så uppgifterna skrivs för hand. Ett färdigt exempel finns i
-[`exempel/verktyg.json`](../exempel/verktyg.json).
+Pluginet ställs in i Hajk Admin (Kartor, Verktyg, Detaljplaner) eller direkt i kartans JSON-fil
+(`apps/backend/App_Data/<karta>.json`), i verktygets `options`. Namnen nedan är JSON-namnen. Ett färdigt exempel finns i
+[`exempel/verktyg.json`](../exempel/verktyg.json). I Admin heter fälten: WMS-adress (`infoUrl`), WFS-adress (`wfsUrl`), Lager som
+frågas (`layers`), kryssrutorna för kartlager (`layerIds`), Rubrik (`title`), Beskrivning (`description`), Sorteringsordning
+(`index`), Verktygsplacering (`target`), Fönsterplacering (`position`), Fönsterbredd (`width`), Fönsterhöjd (`height`) och
+Synlig vid start (`visibleAtStart`, `visibleAtStartMobile`). Tomma fält sparas inte, så pluginets standardvärden gäller.
 
 ## Pluginets inställningar
 
