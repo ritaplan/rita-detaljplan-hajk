@@ -1,0 +1,40 @@
+{
+  "id": "detaljplaner",
+  "caption": "Detaljplaner",
+  "url": "https://kartor.exempelkommun.se/geoserver/planmosaik/wms",
+  "owner": "",
+  "date": "",
+  "content": "",
+  "legend": "",
+  "projection": "EPSG:3857",
+  "layers": ["planmosaik_karta"],
+  "layersInfo": [
+    {
+      "id": "planmosaik_karta",
+      "caption": "Detaljplaner",
+      "legend": "",
+      "infobox": "",
+      "style": "",
+      "queryable": false
+    }
+  ],
+  "searchFields": null,
+  "displayFields": null,
+  "visibleAtStart": true,
+  "tiled": false,
+  "opacity": 1,
+  "singleTile": true,
+  "customRatio": 1.5,
+  "imageFormat": "image/png",
+  "serverType": "geoserver",
+  "attribution": "",
+  "version": "1.1.1",
+  "infoFormat": "application/json",
+  "infoVisible": false,
+  "infoTitle": "",
+  "infoText": "",
+  "infoUrl": "",
+  "infoUrlText": "",
+  "infoOwner": "",
+  "zIndex": null
+}

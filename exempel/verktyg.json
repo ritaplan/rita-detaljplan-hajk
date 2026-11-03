@@ -1,0 +1,15 @@
+{
+  "type": "detaljplaner",
+  "index": 20,
+  "options": {
+    "target": "left",
+    "position": "left",
+    "title": "Detaljplaner",
+    "description": "Klicka på en detaljplan i kartan och se dess bestämmelser och handlingar",
+    "infoUrl": "https://kartor.exempelkommun.se/geoserver/planmosaik/wms",
+    "wfsUrl": "https://kartor.exempelkommun.se/geoserver/planmosaik/ows",
+    "layerIds": ["detaljplaner"],
+    "visibleAtStart": false,
+    "visibleAtStartMobile": false
+  }
+}
