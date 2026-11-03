@@ -1,9 +1,4 @@
-<h1 align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/banner-mork.svg">
-    <img src="docs/images/banner-ljus.svg" alt="Rita Detaljplan – detaljplaner i din Hajk-karta" width="720">
-  </picture>
-</h1>
+# Rita Detaljplan – Hajk-plugin
 
 **Visa kommunens detaljplaner i Hajk, direkt ur plandatabasen.** Ett klick på en plan öppnar ett fönster med planens
 uppgifter, plankartan och planbeskrivningen och alla bestämmelser i området med motiv. Det här är ett plugin för
