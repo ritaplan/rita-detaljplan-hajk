@@ -35,8 +35,9 @@ Det reagerar inte när ett annat verktyg har kartklicken (mätning, ritning och 
 en kort ruta ("Det finns ingen detaljplan här") och fönstret öppnas inte.
 
 Uppgifterna hämtas med ett enda GetFeatureInfo-anrop till `infoUrl` (lagren `planmosaik` och `plan_bestammelser`). Kartan kan
-gå i det koordinatsystem du vill: bestämmelsernas ytor levereras i Web Mercator och räknas om i kartan. Provat är bara
-Web Mercator (EPSG:3857).
+gå i det koordinatsystem du vill: bestämmelsernas ytor levereras i Web Mercator och räknas om i kartan. Provat är Web Mercator
+(EPSG:3857) och SWEREF 99 TM (EPSG:3006). Kartans koordinatsystem måste vara definierat i kartans `projections` (som Hajks
+standardkarta har för 3006).
 
 ## Anrop mellan Hajk och GeoServer
 

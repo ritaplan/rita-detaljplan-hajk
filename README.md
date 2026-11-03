@@ -85,13 +85,13 @@ Hajk Admin. Därefter lägger du detaljplanelagret i din karta, ställer in verk
 
 Hajk 4.3.0 (klienten och Admin i utvecklingsläge och som produktionsbygge, backend på Node 26 och i en Node 24-behållare på en server), GeoServer 3.0.2 och Rita Detaljplans demoplaner. Provat: klick
 på plan och på tom mark, fönstret på dator och mobil, handlingslänkar, alla bestämmelser (WFS), markering i kartan och
-anrop genom Hajks egen proxy. Kartan gick i Web Mercator (EPSG:3857).
+anrop genom Hajks egen proxy. Kartan gick i Web Mercator (EPSG:3857) och i SWEREF 99 TM (EPSG:3006, klienten i utvecklingsläge).
 
 Produktionsbygget av Hajk (klient och Admin) med pluginet är provkört i Docker på en server: se [docs/produktion.md](docs/produktion.md).
 Inställningssidan i Hajk Admin är provad så här: sidan öppnas med de sparade värdena, en ändring sparas och kartfilen
 uppdateras utan att andra verktyg påverkas.
 
-**Inte provat:** kartor i andra koordinatsystem än Web Mercator, Hajk med inloggning (Active Directory) och andra Hajk-versioner än 4.3.0.
+**Inte provat:** kartor i andra koordinatsystem än Web Mercator och SWEREF 99 TM, Hajk med inloggning (Active Directory) och andra Hajk-versioner än 4.3.0.
 
 ## Begränsningar
 
