@@ -1,10 +1,10 @@
-# Rita Detaljplan – Hajk-plugin
+# Rita Detaljplan – integration för Hajk
 
 **Visa kommunens detaljplaner i Hajk, direkt ur plandatabasen.** Ett klick på en plan öppnar ett fönster med planens
-uppgifter, plankartan och planbeskrivningen och alla bestämmelser i området med motiv. Det här är ett plugin för
-[Hajk](https://github.com/hajkmap/Hajk) (4.x) som vilken kommun som helst kan använda.
+uppgifter, plankartan och planbeskrivningen och alla bestämmelser i området med motiv. Det här är integrationen för
+[Hajk](https://github.com/hajkmap/Hajk) (4.x), ett plugin som vilken kommun som helst kan använda.
 
-Det är samma panel som i Origo-lösningen [rita-detaljplan-origomap](https://github.com/ritaplan/rita-detaljplan-origomap),
+Det är samma panel som i [integrationen för Origo](https://github.com/ritaplan/rita-detaljplan-origomap),
 omskriven som ett Hajk-plugin (React och Material UI). Planerna ritas i QGIS-pluginet
 [Rita Detaljplan](https://github.com/ritaplan/rita-detaljplan) och checkas in i PostGIS.
 
@@ -26,7 +26,7 @@ omskriven som ett Hajk-plugin (React och Material UI). Planerna ritas i QGIS-plu
 | **Alla bestämmelser i planen** | En knapp hämtar bestämmelserna i alla områden (WFS). |
 | **Inställningssida i Hajk Admin** | Verktyget ställs in i Hajks administrationsgränssnitt (Kartor, Verktyg, Detaljplaner): adresser, vilka lager som visar planerna och fönstrets utseende. Inget JSON-arbete. |
 | **Hajks eget utseende** | Fönstret följer Hajks tema (provat i mörkt läge) och fungerar på dator och telefon. |
-| **Bara det som är offentligt** | Pluginet läser samma skrivskyddade vyer som Origo-lösningen. Du bestämmer vilka planstatusar som visas. |
+| **Bara det som är offentligt** | Pluginet läser samma skrivskyddade vyer som integrationen för Origo. Du bestämmer vilka planstatusar som visas. |
 
 ## Så fungerar det
 
@@ -92,7 +92,7 @@ uppdateras utan att andra verktyg påverkas.
 
 - Hajk Admin är en separat applikation som också måste byggas om för att inställningssidan ska synas. Vill du inte ha den,
   kör installationen med `--utan-admin` och ställ in verktyget i kartans JSON-fil.
-- Vektorrutor (variant B i Origo-lösningen) stöds inte av Hajk 4.3. Använd lagret som bildlager (WMS).
+- Vektorrutor (variant B i integrationen för Origo) stöds inte av Hajk 4.3. Använd lagret som bildlager (WMS).
 - Lagret i Hajk ska vara markerat som inte frågbart i Hajks egen infoklick, annars visas två rutor. Pluginet sköter klicken.
 - Texterna i fönstret är på svenska.
 

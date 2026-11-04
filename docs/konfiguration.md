@@ -63,6 +63,6 @@ och kör `node installera.mjs` igen.
 
 ## Vad som visas ur databasen
 
-Samma uppgifter som i Origo-lösningen: se
+Samma uppgifter som i integrationen för Origo: se
 [data.md](https://github.com/ritaplan/rita-detaljplan-origomap/blob/main/docs/data.md). Vilka planstatusar som är offentliga
 bestäms i databasvyn `planmosaik` (`PUBLIC_STATUSES`), inte i pluginet.
