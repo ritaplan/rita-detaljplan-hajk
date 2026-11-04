@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Säkerhetsfråga
+    url: https://github.com/ritaplan/rita-detaljplan-hajk/security/advisories/new
+    about: Rapportera säkerhetsbrister privat, inte som öppet ärende.
+  - name: Fråga om Hajk i sig
+    url: https://github.com/hajkmap/Hajk/issues
+    about: Pluginet är inte en del av Hajk. Frågor om Hajk själv ställer du i Hajks eget repo.
+  - name: Fråga om QGIS-pluginet Rita Detaljplan
+    url: https://github.com/ritaplan/rita-detaljplan/issues
+    about: Hur planerna ritas och checkas in i QGIS hör till Rita Detaljplan.

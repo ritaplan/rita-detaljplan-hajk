@@ -1,0 +1,8 @@
+# Håller de fastlåsta versionerna av GitHub Actions (se .github/workflows/) uppdaterade. Repot har inga egna
+# npm-paket: pluginet använder det Hajk redan har (React, MUI, OpenLayers), så det finns inget annat att uppdatera här.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
