@@ -96,6 +96,12 @@ uppdateras utan att andra verktyg påverkas.
 - Lagret i Hajk ska vara markerat som inte frågbart i Hajks egen infoklick, annars visas två rutor. Pluginet sköter klicken.
 - Texterna i fönstret är på svenska.
 
+## Bidra och ändringar
+
+- [CONTRIBUTING.md](CONTRIBUTING.md): så rapporterar du fel, provar koden och skickar in en ändring.
+- [CHANGELOG.md](CHANGELOG.md): vad som ändrats mellan versionerna.
+- [NOTICE.md](NOTICE.md): material från andra och deras villkor.
+
 ## Licens
 
 GNU General Public License, version 2 eller senare, som Rita Detaljplan. Se [LICENSE](LICENSE). Hajk har egen licens (MIT).

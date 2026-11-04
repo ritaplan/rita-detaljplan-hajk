@@ -127,12 +127,24 @@ const toolOptionsFile = path.join(adminDir, "tooloptions.jsx");
 const adminTarget = path.join(adminDir, "tools", "detaljplaner.jsx");
 let adminDone = false;
 
+// Läser filen direkt i stället för att först fråga om den finns (då kan den hinna försvinna eller bytas ut emellan).
+// Finns den inte (ENOENT) är det ett eget fall; alla andra fel stoppar skriptet.
+function readIfExists(file) {
+  try {
+    return fs.readFileSync(file, "utf8");
+  } catch (error) {
+    if (error.code === "ENOENT") return null;
+    throw error;
+  }
+}
+
+let adminText = null;
 if (withoutAdmin) {
   console.log("Hajk Admin: hoppade över (--utan-admin).");
-} else if (!fs.existsSync(toolOptionsFile)) {
+} else if ((adminText = readIfExists(toolOptionsFile)) === null) {
   console.log("Hajk Admin: hittar inte apps/admin här, hoppar över inställningssidan.");
 } else {
-  let text = fs.readFileSync(toolOptionsFile, "utf8");
+  let text = adminText;
   const nl = text.includes("\r\n") ? "\r\n" : "\n";
   const lines = {
     import: 'import Detaljplaner from "./tools/detaljplaner.jsx";',

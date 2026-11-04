@@ -10,6 +10,10 @@ Formatet följer [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/), versi
   profil. Märket, banderollerna och förhandsbilden är borttagna.
 - **Standardfiler och kontroller:** CONTRIBUTING, CHANGELOG och NOTICE, ärendemallar, Dependabot för GitHub Actions och
   automatiska kontroller på GitHub (kodanalys med CodeQL för JavaScript och OpenSSF Scorecard).
+- **Installationsskriptet** `installera.mjs` läser Hajk Admins `tooloptions.jsx` direkt i stället för att först fråga om
+  filen finns (ett fynd från den nya kodanalysen: en möjlig kapplöpning i filsystemet). Skriptet gör samma sak som förut, och
+  fyra fall är provade mot en påhittad Hajk-mapp: utan Admin, med Admin, upprepad installation och `--ta-bort`. Det rörde inte
+  pluginet som körs i webbläsaren.
 
 ## [0.1.0] – 2026-11-03 – första versionen
 

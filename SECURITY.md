@@ -14,6 +14,8 @@ I korthet:
 - Pluginet lagrar inget i webbläsaren och skickar inga uppgifter någon annanstans än till adresserna `infoUrl` och `wfsUrl`
   som du själv anger.
 - Pluginet innehåller inga lösenord eller nycklar.
+- På GitHub körs automatisk kodanalys (CodeQL för JavaScript) och OpenSSF Scorecard, och Dependabot håller de fastlåsta
+  versionerna av GitHub Actions uppdaterade. De ersätter inte en oberoende granskning.
 
 Kontrollera själv, innan du publicerar, att listan över offentliga planstatusar (`PUBLIC_STATUSES` i
 rita-detaljplan-origomap) är den du vill.
