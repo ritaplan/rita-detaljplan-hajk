@@ -52,6 +52,13 @@ Webbläsaren gör anropen, så Hajk och GeoServer måste vara åtkomliga för va
 3. **CORS i GeoServer.** Tillåt Hajks adress i GeoServer (`CORS_ENABLED=true` i behållarens inställningar). Då kan
    `infoUrl` peka direkt på GeoServer.
 
+**CORS är också vad som låter andra webbappar läsa planerna som data** (WFS/GeoJSON) direkt från din karttjänst, till
+exempel [Dataspatium](https://github.com/marwiss/Dataspatium). Kartbilder (WMS) visas på andra webbplatser utan särskilt
+tillstånd, men data läses bara om tjänsten själv säger ja. Vi rekommenderar att CORS slås på för de **publika** lagren:
+de innehåller bara det som redan är offentligt. Slå inte på det för lager som kräver inloggning. Hur det görs och hur du
+kontrollerar det står i
+[rita-detaljplan-origomap](https://github.com/ritaplan/rita-detaljplan-origomap/blob/main/docs/kom-igang.md#låt-andra-webbappar-läsa-planerna-cors-valfritt).
+
 Pluginet använder Hajks egen anropsfunktion (`hfetch`), så Hajks inställningar för inloggningsuppgifter (`hfetch` i
 `appConfig.json`) gäller även här.
 

@@ -4,6 +4,9 @@ Formatet följer [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/), versi
 
 ## Ej utgivet
 
+- **Dokumentation: CORS för publika lager.** `docs/konfiguration.md` förklarar att CORS också är vad som låter andra
+  webbappar läsa planerna som data (WFS/GeoJSON), rekommenderar det för de publika lagren och hänvisar till beskrivningen i
+  integrationen för Origo. Förslag från Martin Wiss, som prövat planerna i Dataspatium.
 - **Provat i SWEREF 99 TM (EPSG:3006):** pluginet fungerar i en Hajk-karta i EPSG:3006 utan kodändring. README och
   inställningsdokumentet säger nu det.
 - **Texter:** README kallar pluginet *integrationen för Hajk*, som [ritaplan.xyz](https://ritaplan.xyz) och organisationens
