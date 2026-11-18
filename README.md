@@ -4,9 +4,12 @@
 uppgifter, plankartan och planbeskrivningen och alla bestämmelser i området med motiv. Det här är integrationen för
 [Hajk](https://github.com/hajkmap/Hajk) (4.x), ett plugin som vilken kommun som helst kan använda.
 
+> **Det här är en visare, inte ett ritverktyg.** Man ritar och redigerar inte planer i Hajk. Planerna ritas i QGIS-pluginet
+> [Rita Detaljplan](https://github.com/ritaplan/rita-detaljplan) och checkas in i PostGIS. Pluginet här visar de färdiga,
+> publicerade planerna för dem som tittar i kartan. I Hajk heter verktyget *Detaljplaner*.
+
 Det är samma panel som i [integrationen för Origo](https://github.com/ritaplan/rita-detaljplan-origomap),
-omskriven som ett Hajk-plugin (React och Material UI). Planerna ritas i QGIS-pluginet
-[Rita Detaljplan](https://github.com/ritaplan/rita-detaljplan) och checkas in i PostGIS.
+omskriven som ett Hajk-plugin (React och Material UI).
 
 <p align="center">
   <img src="docs/images/skarmbild.png" alt="Hajk med pluginet Detaljplaner: en vald detaljplan är inramad i kartan och fönstret till vänster visar planens status, plankartan och planbeskrivningen som knappar, syfte, datum och genomförandetid" width="720">
