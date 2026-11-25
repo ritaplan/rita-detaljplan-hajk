@@ -23,7 +23,7 @@ omskriven som ett Hajk-plugin (React och Material UI).
 
 | | |
 |---|---|
-| **Plankartan i Hajk** | Planerna visas som ett vanligt WMS-lager i Hajk, ritat av GeoServer i Boverkets färger och mönster. |
+| **Plankartan i Hajk** | Planerna visas som ett vanligt WMS-lager i Hajk, ritat av GeoServer med mönster enligt Boverkets föreskrifter (BFS 2020:6) och samma användningsfärger som i Rita Detaljplan. |
 | **Informationsfönster vid klick** | Status i klartext, handlingar (plankarta och planbeskrivning som knappar), syfte, datum och genomförandetid. Bestämmelserna i området med motiv, där de som gäller exakt där man klickade är markerade. |
 | **Markering i kartan** | Området man klickade i ramas in. När man pekar på en bestämmelse markeras dess yta. |
 | **Alla bestämmelser i planen** | En knapp hämtar bestämmelserna i alla områden (WFS). |

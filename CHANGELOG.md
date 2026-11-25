@@ -7,6 +7,8 @@ Formatet följer [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/), versi
 - **README säger att pluginet är en visare.** Man kan inte rita i det: planerna ritas i QGIS-pluginet Rita Detaljplan, och
   Hajk-pluginet (som heter *Detaljplaner* i Hajk) visar de färdiga planerna. Efter synpunkter i Hajks ärende
   [hajkmap/Hajk#1938](https://github.com/hajkmap/Hajk/issues/1938) om att namnet kunde vilseleda. Repots namn är oförändrat.
+- **README om färgerna:** användningsfärgerna är desamma som i Rita Detaljplan (färgnamnen följer BFS 2020:6, kulörerna är
+  pluginets). De kommer ur databasvyerna i integrationen för Origo.
 - **Dokumentation: CORS för publika lager.** `docs/konfiguration.md` förklarar att CORS också är vad som låter andra
   webbappar läsa planerna som data (WFS/GeoJSON), rekommenderar det för de publika lagren och hänvisar till beskrivningen i
   integrationen för Origo. Förslag från Martin Wiss, som prövat planerna i Dataspatium.
